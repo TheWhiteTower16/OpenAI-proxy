@@ -27,14 +27,9 @@ $ git clone git@github.com:TheWhiteTower16/LLM-proxy.git
 $ cd LLM-proxy
 ```
 
-Next, edit the `config.js` file and set `LOCAL_MODE` to `true`. Then build and run the container:
+Then, all you have to do is edit the `config.js` file and set `LOCAL_MODE` to `true`. Then build and run the container!
 
-```bash
-$ docker build . -t the-tower/proxy:latest
-$ docker run --restart=always -p 9000:9000 -d -v $(pwd)/config.js:/config.js:ro the-tower/proxy:latest
-```
-
-### Testing the Proxy
+## Testing the Proxy
 
 To verify that the proxy is functioning correctly, ensure you have an OpenAI API key set as `OPENAI_API_KEY`, then run:
 
@@ -43,15 +38,6 @@ curl http://localhost:9000/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $OPENAI_API_KEY" \
   -d '{"model": "gpt-4o", "messages": [{"role": "user", "content": "Say this is a test!"}], "temperature": 0.7}'
-```
-
-## Configuring OpenAI SDK to Use the Proxy
-
-If you are using the OpenAI SDK, point it to your local proxy:
-
-```python
-import openai
-openai.api_base = "http://localhost:9000/v1"
 ```
 
 ## Security and Moderation Checks
