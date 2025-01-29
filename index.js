@@ -1,5 +1,4 @@
 import helpers from "./helpers.js";
-import converters from "./converters/index.js";
 import preprocessors from "./preprocessors/index.js";
 import postprocessors from "./postprocessors/index.js";
 
@@ -98,33 +97,6 @@ export async function handler(event, context) {
   }
 
   options.json = body;
-
-  const convertedReq = converters.request(
-    endpoint,
-    event.headers,
-    options.json,
-    config,
-    stats,
-  );
-  const pcUrl = convertedReq.url || url;
-  const pcOptions = convertedReq.options || options;
-
-  helpers.log.debug(`Sending ${method} request to ${pcUrl}`);
-  const startTime = new Date();
-  const response = await helpers.makeLLMRequest(method, pcUrl, pcOptions);
-  const endTime = new Date();
-  stats.metadata.latency = endTime.getTime() - startTime.getTime();
-
-  const convertedBody = converters.response(
-    endpoint,
-    event.headers,
-    options.json,
-    response.body,
-    config,
-    stats,
-  );
-  if (convertedBody) response.body = convertedBody;
-
   if (response.body && response.body.error) {
     helpers.log.error(response.body.error);
     stats.error = true;
