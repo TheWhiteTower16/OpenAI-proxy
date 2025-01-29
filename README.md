@@ -4,7 +4,7 @@ LLM Proxy is a lightweight intermediary between your application and the OpenAI 
 
 This proxy is highly flexible in deployment—it can run locally alongside your application, as a container in a Kubernetes environment, or in the cloud as a containerized or serverless application. While experimenting with LLM APIs is straightforward, deploying them in production presents challenges related to cost, security, compliance, data protection, logging, auditing, error handling, and failover.
 
-LLM Proxy addresses these challenges by acting as a pass-through proxy for OpenAI's API while providing additional firewall-like functionalities. It inspects and logs requests and responses while enforcing customizable policies to protect your application.
+LLM Proxy addresses these challenges by acting as a pass-through proxy for OpenAI's API while providing additional firewall-like functionalities. It inspects and logs requests and responses while enforcing customizable policies to protect your application. It is based on the Usage Panda proxy.
 
 ## Features
 
